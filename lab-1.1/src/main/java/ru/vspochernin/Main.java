@@ -18,7 +18,8 @@ public class Main {
                         new Student("Имя2", "Группа1", 3, List.of(2, 2, 3, 3, 5)),
                         new Student("Имя3", "Группа2", 4, List.of(3, 3, 3, 4, 5)),
                         new Student("Имя4", "Группа2", 4, List.of(2, 2, 4, 2, 3)),
-                        new Student("Имя5", "Группа2", 4, List.of(5, 5, 5, 5, 5))));
+                        new Student("Имя5", "Группа2", 4, List.of(5, 5, 5, 5, 5)),
+                        new Student("Имя6", "Группа3", 1, List.of())));
 
         System.out.println("Студенты до перевода на следующий курс:");
         PrintUtils.printStudents(studentCollection.getStudents());

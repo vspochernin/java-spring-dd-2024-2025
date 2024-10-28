@@ -24,7 +24,7 @@ public class StudentCollection {
 
     public void toTheNextCourse() {
         students = students.stream()
-                .filter(student -> student.getAverageMark() + EPS > THRESHOLD_MARK)
+                .filter(student -> student.getAverageMarkO().map(mark -> mark + EPS > THRESHOLD_MARK).orElse(true))
                 .toList();
         students.forEach(Student::toTheNextCourse);
     }

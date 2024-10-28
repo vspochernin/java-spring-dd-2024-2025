@@ -1,6 +1,7 @@
 package ru.vspochernin.model;
 
 import java.util.List;
+import java.util.Optional;
 
 public class Student {
 
@@ -24,11 +25,13 @@ public class Student {
         this.course += 1;
     }
 
-    public double getAverageMark() {
+    public Optional<Double> getAverageMarkO() {
         return marks.stream()
                 .mapToInt(Integer::valueOf)
                 .average()
-                .orElse(0);
+                .stream()
+                .boxed()
+                .findFirst();
     }
 
     @Override
@@ -38,7 +41,7 @@ public class Student {
                 ", group='" + group + '\'' +
                 ", course=" + course +
                 ", marks=" + marks +
-                ", averageMark=" + getAverageMark() +
+                ", averageMark=" + getAverageMarkO() +
                 '}';
     }
 }
