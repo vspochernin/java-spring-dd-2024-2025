@@ -1,22 +1,35 @@
 package edu.mephi.java.model;
 
-import java.awt.*;
+import edu.mephi.java.engine.Game;
+
+import java.awt.Point;
 import java.util.Random;
 
 public class Food {
 
     private Point location;
 
-    public Food() {
-        spawn();
+    public Food(Snake snake) {
+        spawn(snake);
     }
 
-    public void spawn() {
+    public void spawn(Snake snake) {
         Random random = new Random();
-        location = new Point(random.nextInt(20), random.nextInt(20));
+        do {
+            location = new Point(random.nextInt(Game.WIDTH), random.nextInt(Game.HEIGHT));
+        } while (hasIntersectionsWithSnake(snake));
     }
 
     public Point getLocation() {
         return location;
+    }
+
+    private boolean hasIntersectionsWithSnake(Snake snake) {
+        for (Point part : snake.getBody()) {
+            if (location.equals(part)) {
+                return true;
+            }
+        }
+        return false;
     }
 }
