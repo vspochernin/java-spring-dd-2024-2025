@@ -24,6 +24,14 @@ public class Snake {
     }
 
     public void setDirection(int direction) {
+        if (body.size() > 1 &&
+                (this.direction == KeyEvent.VK_RIGHT && direction == KeyEvent.VK_LEFT
+                        || this.direction == KeyEvent.VK_LEFT && direction == KeyEvent.VK_RIGHT
+                        || this.direction == KeyEvent.VK_UP && direction == KeyEvent.VK_DOWN
+                        || this.direction == KeyEvent.VK_DOWN && direction == KeyEvent.VK_UP)) {
+            return;
+        }
+
         this.direction = direction;
     }
 
@@ -43,7 +51,17 @@ public class Snake {
     }
 
     public void grow() {
-        body.addLast(body.getLast());
+        Point lastPart = body.getLast();
+        Point newPart = new Point(lastPart);
+
+        switch (direction) {
+            case KeyEvent.VK_UP -> newPart.y++;
+            case KeyEvent.VK_DOWN -> newPart.y--;
+            case KeyEvent.VK_LEFT -> newPart.x++;
+            case KeyEvent.VK_R -> newPart.x--;
+        }
+
+        body.addLast(newPart);
     }
 
     public boolean checkSelfCollision() {
