@@ -1,7 +1,7 @@
 package edu.mephi.java.engine;
 
-import edu.mephi.java.entities.Food;
-import edu.mephi.java.entities.Snake;
+import edu.mephi.java.model.Food;
+import edu.mephi.java.model.Snake;
 
 import javax.swing.*;
 import java.awt.*;
