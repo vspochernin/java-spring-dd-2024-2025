@@ -3,8 +3,12 @@ package edu.mephi.java.engine;
 import edu.mephi.java.model.Food;
 import edu.mephi.java.model.Snake;
 
-import javax.swing.*;
-import java.awt.*;
+import javax.swing.JPanel;
+import javax.swing.Timer;
+import java.awt.Color;
+import java.awt.Dimension;
+import java.awt.Graphics;
+import java.awt.Point;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyAdapter;
@@ -37,21 +41,22 @@ public class Game extends JPanel implements ActionListener {
 
             @Override
             public void keyPressed(KeyEvent e) {
-                int key = e.getKeyCode();
-                switch (key) {
+                int keyCode = e.getKeyCode();
+                switch (keyCode) {
                     case KeyEvent.VK_UP, KeyEvent.VK_DOWN, KeyEvent.VK_LEFT, KeyEvent.VK_RIGHT ->
-                            snake.setDirection(key);
+                            snake.setDirection(keyCode);
                 }
             }
         });
 
-        timer = new Timer(100, this);
+        timer = new Timer(200, this);
         timer.start();
     }
 
     @Override
     protected void paintComponent(Graphics g) {
         super.paintComponent(g);
+
         if (gameOver) {
             drawGameOver(g);
         } else {
@@ -59,6 +64,28 @@ public class Game extends JPanel implements ActionListener {
             drawFood(g);
             drawScore(g);
         }
+    }
+
+    @Override
+    public void actionPerformed(ActionEvent e) {
+        if (!gameOver) {
+            snake.move();
+            checkIntersections();
+            repaint();
+        }
+    }
+
+    public void restart() {
+        gameOver = false;
+        score = 0;
+        snake = new Snake();
+        food = new Food(snake);
+        timer.start();
+        repaint();
+    }
+
+    public boolean isGameOver() {
+        return gameOver;
     }
 
     private void drawSnake(Graphics g) {
@@ -86,16 +113,7 @@ public class Game extends JPanel implements ActionListener {
         g.drawString(gameOverText, 40, 100);
     }
 
-    @Override
-    public void actionPerformed(ActionEvent e) {
-        if (!gameOver) {
-            snake.move();
-            checkCollision();
-            repaint();
-        }
-    }
-
-    public void checkCollision() {
+    private void checkIntersections() {
         Point head = snake.getBody().getFirst();
 
         if (head.equals(food.getLocation())) {
@@ -108,18 +126,5 @@ public class Game extends JPanel implements ActionListener {
             gameOver = true;
             timer.stop();
         }
-    }
-
-    public void restart() {
-        gameOver = false;
-        score = 0;
-        snake = new Snake();
-        food = new Food(snake);
-        timer.start();
-        repaint();
-    }
-
-    public boolean isGameOver() {
-        return gameOver;
     }
 }
