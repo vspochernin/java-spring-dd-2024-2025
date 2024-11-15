@@ -1,12 +1,13 @@
 package edu.mephi.java.entities;
 
-import java.awt.*;
+import java.awt.Point;
 import java.awt.event.KeyEvent;
 import java.util.LinkedList;
+import java.util.List;
 
 public class Snake {
 
-    private final LinkedList<Point> body;
+    private final List<Point> body;
     private int direction;
 
     public Snake() {
@@ -15,15 +16,12 @@ public class Snake {
         this.direction = KeyEvent.VK_RIGHT;
     }
 
-    public LinkedList<Point> getBody() {
+    public List<Point> getBody() {
         return body;
     }
 
-    public int getDirection() {
-        return direction;
-    }
-
     public void setDirection(int direction) {
+        // Если длина змейки больше 1, нельзя повернуть в себя.
         if (body.size() > 1 &&
                 (this.direction == KeyEvent.VK_RIGHT && direction == KeyEvent.VK_LEFT
                         || this.direction == KeyEvent.VK_LEFT && direction == KeyEvent.VK_RIGHT
