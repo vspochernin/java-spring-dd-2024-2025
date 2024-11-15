@@ -13,6 +13,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
+import java.util.Iterator;
 
 public class Game extends JPanel implements ActionListener {
 
@@ -89,15 +90,21 @@ public class Game extends JPanel implements ActionListener {
     }
 
     private void drawSnake(Graphics g) {
-        g.setColor(Color.BLUE);
-        for (Point p : snake.getBody()) {
-            g.fillRect(p.x * TILE_SIZE, p.y * TILE_SIZE, TILE_SIZE, TILE_SIZE);
-            g.setColor(Color.GREEN);
+        Iterator<Point> bodyIterator = snake.getBody().iterator();
+        Point head = bodyIterator.next();
+
+        g.setColor(Color.WHITE);
+        g.fillRect(head.x * TILE_SIZE, head.y * TILE_SIZE, TILE_SIZE, TILE_SIZE);
+
+        g.setColor(Color.GRAY);
+        while (bodyIterator.hasNext()) {
+            Point part = bodyIterator.next();
+            g.fillRect(part.x * TILE_SIZE, part.y * TILE_SIZE, TILE_SIZE, TILE_SIZE);
         }
     }
 
     private void drawFood(Graphics g) {
-        g.setColor(Color.RED);
+        g.setColor(Color.GREEN);
         g.fillRect(food.getLocation().x * TILE_SIZE, food.getLocation().y * TILE_SIZE, TILE_SIZE, TILE_SIZE);
     }
 
@@ -110,7 +117,7 @@ public class Game extends JPanel implements ActionListener {
     private void drawGameOver(Graphics g) {
         String gameOverText = "Game Over! Press 'R' to restart";
         g.setColor(Color.WHITE);
-        g.drawString(gameOverText, 40, 100);
+        g.drawString(gameOverText, 10, 20);
     }
 
     private void checkIntersections() {
