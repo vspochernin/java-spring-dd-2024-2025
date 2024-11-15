@@ -1,6 +1,9 @@
 package edu.mephi.java.model;
 
+import edu.mephi.java.engine.Game;
+
 import java.awt.Point;
+import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -60,13 +63,21 @@ public class Snake {
         body.addLast(newTail);
     }
 
-    public boolean checkSelfCollision() {
-        Point head = body.getFirst();
-        for (int i = 1; i < body.size(); i++) {
-            if (body.get(i).equals(head)) {
+    public boolean checkIntersections() {
+        Iterator<Point> bodyIterator = body.iterator();
+
+        Point head = bodyIterator.next();
+        if (head.x < 0 || head.y < 0 || head.x >= Game.WIDTH || head.y >= Game.HEIGHT) {
+            return true;
+        }
+
+        while (bodyIterator.hasNext()) {
+            Point part = bodyIterator.next();
+            if (part.equals(head)) {
                 return true;
             }
         }
+
         return false;
     }
 }

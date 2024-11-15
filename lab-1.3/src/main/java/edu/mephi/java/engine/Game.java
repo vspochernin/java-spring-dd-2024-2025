@@ -12,9 +12,10 @@ import java.awt.event.KeyEvent;
 
 public class Game extends JPanel implements ActionListener {
 
+    public static final int WIDTH = 20;
+    public static final int HEIGHT = 20;
+
     private static final int TILE_SIZE = 20;
-    private static final int WIDTH = 20;
-    private static final int HEIGHT = 20;
 
     private final Timer timer;
 
@@ -103,7 +104,7 @@ public class Game extends JPanel implements ActionListener {
             score++;
         }
 
-        if (head.x < 0 || head.y < 0 || head.x >= WIDTH || head.y >= HEIGHT || snake.checkSelfCollision()) {
+        if (head.x < 0 || head.y < 0 || head.x >= WIDTH || head.y >= HEIGHT || snake.checkIntersections()) {
             gameOver = true;
             timer.stop();
         }
