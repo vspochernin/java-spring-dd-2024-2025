@@ -8,23 +8,23 @@ import java.awt.event.KeyEvent;
 
 public class Main {
 
-	public static void main(String[] args) {
+    public static void main(String[] args) {
 
-		JFrame frame = new JFrame("Game");
-		Game game = new Game();
-		frame.add(game);
-		frame.pack();
-		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		frame.setVisible(true);
+        JFrame frame = new JFrame("Game");
+        Game game = new Game();
+        frame.add(game);
+        frame.pack();
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.setVisible(true);
 
-		game.addKeyListener(new KeyAdapter() {
-			@Override
-			public void keyPressed(KeyEvent e) {
-				if (game.isGameOver() && e.getKeyCode() == KeyEvent.VK_R) {
-					game.restart();
-				}
-			}
-		});
+        game.addKeyListener(new KeyAdapter() {
+            @Override
+            public void keyPressed(KeyEvent e) {
+                if (game.isGameOver() && e.getKeyCode() == KeyEvent.VK_R) {
+                    game.restart();
+                }
+            }
+        });
 
-	}
+    }
 }
