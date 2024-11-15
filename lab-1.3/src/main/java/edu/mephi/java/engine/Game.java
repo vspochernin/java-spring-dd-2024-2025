@@ -30,7 +30,7 @@ public class Game extends JPanel implements ActionListener {
         setFocusable(true);
 
         this.snake = new Snake();
-        this.food = new Food();
+        this.food = new Food(snake);
         this.score = 0;
 
         addKeyListener(new KeyAdapter() {
@@ -100,11 +100,11 @@ public class Game extends JPanel implements ActionListener {
 
         if (head.equals(food.getLocation())) {
             snake.grow();
-            food.spawn();
+            food.spawn(snake);
             score++;
         }
 
-        if (head.x < 0 || head.y < 0 || head.x >= WIDTH || head.y >= HEIGHT || snake.checkIntersections()) {
+        if (snake.checkIntersections()) {
             gameOver = true;
             timer.stop();
         }
@@ -114,7 +114,7 @@ public class Game extends JPanel implements ActionListener {
         gameOver = false;
         score = 0;
         snake = new Snake();
-        food = new Food();
+        food = new Food(snake);
         timer.start();
         repaint();
     }
