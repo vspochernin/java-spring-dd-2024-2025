@@ -27,4 +27,10 @@ public class User {
     @Enumerated(EnumType.STRING)
     @Column(nullable = false)
     private Role role;
+
+    public User(String firstName, String lastName, Role role) {
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.role = role;
+    }
 }
