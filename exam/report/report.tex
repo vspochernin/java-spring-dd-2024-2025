@@ -196,7 +196,7 @@
 
 Здесь мы добавили метод \texttt{findByAgeGreaterThanEqualOrderByFirstNameAsc} для того, чтобы использовать его в эндпоинте \texttt{additional-info}.
 
-Важный момент: хотя в задании сказано использовать соответствующие слоям Spring аннотации, в репозитории совсем не обязательно ставить аннотацию \texttt{@Repository}, в случае, если это \texttt {JPA Repository}\footnote{\url{https://stackoverflow.com/questions/44069367/repository-not-necessary-when-implementing-jparepository}}.
+Важный момент: хотя в задании сказано использовать соответствующие слоям Spring аннотации, в репозитории совсем не обязательно ставить аннотацию \texttt{@Repository}, в случае, если это \texttt {JPA Repository} (\url{https://stackoverflow.com/questions/44069367/repository-not-necessary-when-implementing-jparepository}).
 
 \subsubsection{Пакет service}
 
@@ -207,6 +207,16 @@
 \large
 
 Класс использует созданный ранее репозиторий, и в нем реализованы методы для получения всех пользователей, добавления нового пользователя, а также для получения списках всех пользователей, возраст которых больше либо равен заданному, отсортированный по имени (\texttt{firstName}) в алфавитном порядке.
+
+\subsubsection{Пакет controller}
+
+Наконец, реализуем контроллер для обработки входящих запросов:
+
+\normalsize
+\inputminted[frame=single]{Java}{../src/main/java/ru/vspochernin/exam/controller/UserController.java}
+\large
+
+Для соответствия условиям задачи здесь задается базовый путь с помощью аннотации \texttt{@RequestMapping("/user-api/v1")}. А в случае создания пользователя также возвращается статус 201 CREATED (вместо стандартного 200 OK) с помощью аннотации \texttt{@ResponseStatus(HttpStatus.CREATED)}.
 
 % \it{Раздел должен содержать описание функционала реализованного приложения. Описание может сопровождаться скриншотами, которые должны содержать информацию об успешном выполнении каждого запроса (в т.ч.: входящий запрос, тело запроса, статус и результат выполнения запроса).}
 
