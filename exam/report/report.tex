@@ -166,6 +166,35 @@
 	\item Lombok - вспомогательный инструмент для уменьшения количества boilerplate кода.
 \end{itemize}
 
+\subsection{Разработка}
+
+\subsubsection{Пакет model}
+
+Для начала реализуем классы-модели.
+
+Создадим enum \texttt{Country}, задающий 5 стран:
+
+\normalsize
+\inputminted[frame=single]{Java}{../src/main/java/ru/vspochernin/exam/model/Country.java}
+\large
+
+А также класс пользователя, который будет связан с таблицей \texttt{users} базы данных:
+
+\normalsize
+\inputminted[frame=single]{Java}{../src/main/java/ru/vspochernin/exam/model/User.java}
+\large
+
+Важными моментами здесь является аннотация \texttt{@Table(name = "users")}, задающая название таблицы БД, а также аннотация \texttt{@Enumerated(EnumType.STRING)}, объясняющая, что enum нужно обрабатывать как строку (без нее в базу записывались бы порядковые номера). \texttt{@GeneratedValue(strategy = GenerationType.IDENTITY)} над полем \texttt{id} делегирует установку ID на уровень базы данных, нам не нужно будет задумываться об этом.
+
+\subsubsection{Пакет repository}
+
+Далее реализуем класс-репозиторий для пользователя:
+
+\normalsize
+\inputminted[frame=single]{Java}{../src/main/java/ru/vspochernin/exam/repository/UserRepository.java}
+\large
+
+Здесь мы добавили метод \texttt{findByAgeGreaterThanEqualOrderByFirstNameAsc} для того, чтобы использовать его в эндпоинте \texttt{additional-info}.
 
 % \it{Раздел должен содержать описание функционала реализованного приложения. Описание может сопровождаться скриншотами, которые должны содержать информацию об успешном выполнении каждого запроса (в т.ч.: входящий запрос, тело запроса, статус и результат выполнения запроса).}
 
