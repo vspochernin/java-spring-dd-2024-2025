@@ -22,4 +22,10 @@ public class User {
 
     @Enumerated(EnumType.STRING)
     private Country country;
+
+    public User(String firstName, Integer age, Country country) {
+        this.firstName = firstName;
+        this.age = age;
+        this.country = country;
+    }
 }

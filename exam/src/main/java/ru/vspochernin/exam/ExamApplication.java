@@ -11,38 +11,18 @@ import ru.vspochernin.exam.repository.UserRepository;
 @SpringBootApplication
 public class ExamApplication {
 
-	public static void main(String[] args) {
-		SpringApplication.run(ExamApplication.class, args);
-	}
+    public static void main(String[] args) {
+        SpringApplication.run(ExamApplication.class, args);
+    }
 
     @Bean
     public CommandLineRunner initDatabase(UserRepository userRepository) {
         return args -> {
-            userRepository.save(User.builder()
-                    .firstName("Alexey")
-                    .age(25)
-                    .country(Country.RUSSIA)
-                    .build());
-            userRepository.save(User.builder()
-                    .firstName("John")
-                    .age(30)
-                    .country(Country.USA)
-                    .build());
-            userRepository.save(User.builder()
-                    .firstName("Pierre")
-                    .age(14)
-                    .country(Country.FRANCE)
-                    .build());
-            userRepository.save(User.builder()
-                    .firstName("Hans")
-                    .age(40)
-                    .country(Country.GERMANY)
-                    .build());
-            userRepository.save(User.builder()
-                    .firstName("Li")
-                    .age(18)
-                    .country(Country.JAPAN)
-                    .build());
+            userRepository.save(new User("Alexey", 15, Country.RUSSIA));
+            userRepository.save(new User("John", 30, Country.USA));
+            userRepository.save(new User("Pierre", 14, Country.FRANCE));
+            userRepository.save(new User("Hans", 40, Country.GERMANY));
+            userRepository.save(new User("Hideo", 61, Country.JAPAN));
         };
     }
 }
